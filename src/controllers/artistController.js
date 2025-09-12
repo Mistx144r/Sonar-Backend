@@ -29,6 +29,9 @@ export async function createArtist(req, res) {
         const newArtist = await artistService.createArtist(req.body);
         res.status(201).json(newArtist);
     } catch (error) {
+        if (error.message === 'Este email já está cadastrado como usuário.') {
+            return res.status(409).json({ message: error.message });
+        }
         if (error.message === 'Este email já está cadastrado.') {
             return res.status(409).json({ message: error.message });
         }
@@ -71,9 +74,10 @@ export async function deleteArtist(req, res) {
 // http://localhost:3000/artists/login
 export async function loginArtist(req, res) {
     try {
-        const token = await artistService.loginArtist(req.body.email, req.body.senha);
+        const token = await artistService.loginArtist(req.body.email, req.body.password);
         res.status(200).json({ token: token });
     } catch (error) {
+        console.log(error);
         if (error.message === 'Credenciais inválidas.') {
             return res.status(401).json({ message: error.message });
         }

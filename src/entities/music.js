@@ -21,6 +21,11 @@ const Music = sequelize.define(
             type: DataTypes.STRING(255),
             allowNull: false,
         },
+        duration: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+            defaultValue: 0,
+        },
         musicAudioCDN: {
             type: DataTypes.STRING(255),
             allowNull: false,
@@ -38,11 +43,6 @@ const Music = sequelize.define(
             type: DataTypes.BIGINT,
             allowNull: false,
             defaultValue: 0,
-        },
-        data_lancamento: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
         },
         data_criacao: {
             type: DataTypes.DATE,

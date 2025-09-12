@@ -1,4 +1,5 @@
 import User from '../entities/user.js';
+import Artist from '../entities/artist.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
@@ -13,6 +14,11 @@ export async function getUserById(id) {
 export async function createUser(userData) {
     const { nome, email, senha } = userData;
     const existingUser = await User.findOne({ where: { email: email } });
+    const existingArtist = await Artist.findOne({ where: { email: email } });
+
+    if (existingArtist) {
+        throw new Error('Este email já está cadastrado como artista.');
+    }
 
     if (existingUser) {
         throw new Error('Este email já está cadastrado.');
