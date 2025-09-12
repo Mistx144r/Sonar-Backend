@@ -29,6 +29,9 @@ export async function createUser(req, res) {
         const newUser = await userService.createUser(req.body);
         res.status(201).json(newUser);
     } catch (error) {
+        if (error.message === 'Este email já está cadastrado como artista.') {
+            return res.status(400).json({ message: error.message });
+        }
         if (error.message === 'Este email já está cadastrado.') {
             return res.status(409).json({ message: error.message });
         }
@@ -74,6 +77,7 @@ export async function loginUser(req, res) {
         if (error.message === 'Credenciais inválidas.') {
             return res.status(401).json({ message: error.message });
         }
+        console.log(error);
         res.status(500).json({ message: "Erro interno do servidor." });
     }
 }

@@ -1,4 +1,5 @@
 import Artist from '../entities/artist.js';
+import User from '../entities/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { uploadFile, deleteFile } from "../utils/S3services.js";
@@ -14,6 +15,11 @@ export async function getArtistById(id) {
 export async function createArtist(artistData) {
     const { artistName, email, password } = artistData;
     const existingArtist = await Artist.findOne({ where: { email: email } });
+    const existingUser = await User.findOne({ where: { email: email } });
+
+    if (existingUser) {
+        throw new Error('Este email já está cadastrado como usuário.');
+    }
 
     if (existingArtist) {
         throw new Error('Este email já está cadastrado.');
@@ -36,11 +42,14 @@ export async function createArtist(artistData) {
 
 export async function updateArtist(id, artistData, files) {
     const artist = await Artist.findByPk(id);
-    const existingArtistWithEmail = await Artist.findOne({ where: { email: artistData.email } });
     if (!artist) throw new Error('Usuário não encontrado.');
 
-    if (existingArtistWithEmail && existingArtistWithEmail.id !== Number(id)) {
-        throw new Error('Este email já está cadastrado.');
+    if (artistData.email) {
+        const existingArtistWithEmail = await Artist.findOne({ where: { email: artistData.email } });
+
+        if (existingArtistWithEmail && existingArtistWithEmail.id !== Number(id)) {
+            throw new Error('Este email já está cadastrado.');
+        }
     }
 
     if (artistData.id) {
@@ -51,8 +60,8 @@ export async function updateArtist(id, artistData, files) {
         delete artistData.data_criacao;
     }
 
-    if (artistData.senha) {
-        artistData.senha = await bcrypt.hash(artistData.senha, 10);
+    if (artistData.password) {
+        artistData.password = await bcrypt.hash(artistData.password, 10);
     }
 
     if (files?.artistImage?.[0]) {
@@ -95,7 +104,7 @@ export async function loginArtist(email, plainTextPassword) {
         throw new Error('Credenciais inválidas.');
     }
 
-    const isMatch = await bcrypt.compare(plainTextPassword, artist.senha);
+    const isMatch = await bcrypt.compare(plainTextPassword, artist.password);
     if (!isMatch) {
         throw new Error('Credenciais inválidas.');
     }

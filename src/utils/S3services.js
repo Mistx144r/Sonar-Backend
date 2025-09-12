@@ -1,4 +1,5 @@
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+const CLOUDFRONT_URL = process.env.AWS_CLOUDFRONT_URL;
 
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
@@ -21,7 +22,7 @@ export async function uploadFile(specificFolder, file) {
 
     await s3.send(new PutObjectCommand(params));
 
-    return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
+    return `${CLOUDFRONT_URL}/${key}`;
 }
 
 export async function deleteFile(url) {
