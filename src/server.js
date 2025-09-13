@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import https from 'https';
+import fs from 'fs';
 import userRoutes from './routes/userRoutes.js';
 import artistRoutes from './routes/artistRoutes.js';
 import albumRoutes from './routes/albumRoutes.js';
@@ -24,6 +26,11 @@ api.use('/search', searchRoutes);
 api.use('/playlists', playlistRoutes);
 api.use('/playlistMusics', PlaylistMusicsRoutes)
 
-api.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port ${PORT}`);
+const options = {
+    key: fs.readFileSync('./certs/key.pem'),
+    cert: fs.readFileSync('./certs/cert.pem')
+};
+
+https.createServer(options, api).listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on https://localhost:${PORT}`);
 });
