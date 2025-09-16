@@ -217,9 +217,6 @@ Pull Requests são bem-vindos!
 - Abra uma PR explicando **o que mudou** e **o motivo da mudança**.  
 - Mantenha o padrão de código e a organização do projeto.
 
-## Licença
-Licença personalizada → **uso apenas pessoal**, sem autorização para uso comercial.
-
 ## Autor
 **Lucas Mendonça (Mistx144)**  
 - GitHub: [@Mistx144r](https://github.com/Mistx144r)  
