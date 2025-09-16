@@ -2,8 +2,6 @@
 
 API REST que replica parte do System Design do **Spotify**, servindo como backend para um aplicativo de streaming de música (nível MVP). O projeto foi desenvolvido para demonstrar conhecimentos em arquitetura, banco de dados, cloud services e boas práticas de desenvolvimento backend.
 
-<p>Caralho</p>
-
 ## Objetivo
 O **Sonar** tem como objetivo oferecer uma API que permita:
 - Gerenciar **usuários** e **artistas**.
@@ -12,21 +10,22 @@ O **Sonar** tem como objetivo oferecer uma API que permita:
 - Armazenar e distribuir áudios com **AWS S3 + CloudFront** para garantir performance e escalabilidade.
 # Indice
 
-- [Tecnologia & Dependências](#Tecnologias-&-Dependências)
+- [Tecnologia & Dependências](#Dependências)
 - [Funcionalidades](#Funcionalidades)
 - [Exemplos De API](#Exemplos-De-API)
 - [Instalação E Configuração](#Instalação-e-Configuração)
 - [Deploy](#Deploy)
 - [Variaveis De Ambiente](#Variáveis-de-ambiente)
 - [Futuro Do Projeto](#Futuro-do-Projeto)
-- [Contribuição](#Contribuição)
+- [Contribuição](#♥-Contribuição)
+
 ##  Tecnologias & Dependências
 [![My Skills](https://skillicons.dev/icons?i=express,nodejs,js,sequelize,aws,mysql&perline=6)](https://skillicons.dev)
 - **Node.js** + **Express.js**
 - **Sequelize** (ORM) + **MySQL**
 - **AWS SDK** (S3 + CloudFront)
 
-**Dependências:**
+## **Dependências**
 ```json
 "@aws-sdk/client-s3": "^3.876.0",
 "bcryptjs": "^3.0.2", (Hash De Senhas)
@@ -211,7 +210,8 @@ Algumas melhorias planejadas para as próximas versões da API do Sonar são:
 
 - **Integração com Redis** → para cache de requisições mais frequentes (ex: músicas populares, playlists).  
 - **Filas com RabbitMQ** → para processar uploads de músicas de forma assíncrona, evitando sobrecarga no servidor e reduzindo erros em requisições de `POST`.  
-- **Integração OAuth (Google / etc.)** → permitir login com provedores externos.  
+- **Integração OAuth (Google / etc.)** → permitir login com provedores externos.
+
 ## ♥ Contribuição
 Pull Requests são bem-vindos!  
 - Abra uma PR explicando **o que mudou** e **o motivo da mudança**.  
