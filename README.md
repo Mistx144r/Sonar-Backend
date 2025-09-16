@@ -17,7 +17,7 @@ O **Sonar** tem como objetivo oferecer uma API que permita:
 - [Deploy](#Deploy)
 - [Variaveis De Ambiente](#Variáveis-de-ambiente)
 - [Futuro Do Projeto](#Futuro-do-Projeto)
-- [Contribuição](#♥-Contribuição)
+- [Agradecimentos Especiais](#Agradecimentos-Especiais)
 
 ##  Tecnologias & Dependências
 [![My Skills](https://skillicons.dev/icons?i=express,nodejs,js,sequelize,aws,mysql&perline=6)](https://skillicons.dev)
