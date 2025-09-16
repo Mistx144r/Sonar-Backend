@@ -204,6 +204,33 @@ api.listen(PORT, "0.0.0.0", () => {
 
 ```
 
+## Arquitetura
+
+```mermaid
+flowchart TD
+    %% Usuário
+    U[Usuário] --> F[Site/Front End]
+
+    %% CDN/Backend
+    F --> LB[Load Balancer]
+    LB --> WS[Web Server]
+
+    %% Cache e Banco
+    WS --> R[Redis]
+    R -->|cache miss| M[MySQL]
+    M --> R
+    WS --> |Music Metadata| U
+
+    %% Blob Storage / Música
+    WS --> B[Blob Storage]
+    B --> L[CloudFront]
+    L -->|Signed URL| U[Usuário]:::audio
+
+    %% Classes
+    classDef metadata fill:#a0d8f1,stroke:#333,stroke-width:2px;
+    classDef audio fill:#f9a825,stroke:#333,stroke-width:2px;
+```
+
 # Futuro do Projeto
 
 Algumas melhorias planejadas para as próximas versões da API do Sonar são:  
