@@ -141,7 +141,7 @@ openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem
      pm2 start rota/para/o/server.js
      ```
   5. `pm2 list` para listar todos os processos rodando.
-#### Variáveis de ambiente .env
+#### Variáveis de ambiente
 ```ini
 DB_HOST=localhost
 DB_PORT=3306
